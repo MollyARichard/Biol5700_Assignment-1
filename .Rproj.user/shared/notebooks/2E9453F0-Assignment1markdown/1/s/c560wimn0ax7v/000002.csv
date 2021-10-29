@@ -1,0 +1,3 @@
+"0","leaflet(data=SMR) %>%"
+"0","    addTiles() %>%"
+"0","      addMarkers(data = SMR, lat = ~Latitude, lng = ~Longitude)"

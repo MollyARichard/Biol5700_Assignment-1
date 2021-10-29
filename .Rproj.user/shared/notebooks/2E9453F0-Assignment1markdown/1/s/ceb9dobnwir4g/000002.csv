@@ -1,0 +1,5 @@
+"0","SMRsummary <- summarise(group_by(SMR),"
+"0","                      n=n(), "
+"0","                      mean=mean(Basetime), "
+"0","                      sd=sd(Basetime))"
+"0","kable(SMRsummary, format = ""pandoc"", caption = '<strong>Table 3.</strong>  Depicts the average time to draw blood and the standard deviation between draw times.') "

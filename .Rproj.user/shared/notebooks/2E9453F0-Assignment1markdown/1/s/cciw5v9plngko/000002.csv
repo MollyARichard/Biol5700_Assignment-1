@@ -1,0 +1,5 @@
+"0","SMRsummary <- summarise(group_by(SMR),"
+"0","                      n=n(), "
+"0","                      mean=mean(Average_MR), "
+"0","                      sd=sd(Mass))"
+"0","kable(SMRsummary, format = ""pandoc"", caption = '<strong>Table 2.</strong>  A summary table displaying the number of snakes captured, the average metabolic rate, and standard deviation of mass.') "

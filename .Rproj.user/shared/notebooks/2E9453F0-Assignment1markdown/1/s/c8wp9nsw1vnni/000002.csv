@@ -1,0 +1,6 @@
+"0"," "
+"0","ggplot(SMR, aes(x= Mass , y= Average_MR, shape=Shedding, lty = Shedding))+"
+"0","  geom_point(aes(size = 2))+"
+"0","  geom_smooth(method=(lm), se = FALSE)+"
+"0","  xlab(""Body Mass (g)"") + ylab(""Oxygen Consumption (mL O2 hour-1)"")+"
+"0","  theme_bw(base_size = 10)"

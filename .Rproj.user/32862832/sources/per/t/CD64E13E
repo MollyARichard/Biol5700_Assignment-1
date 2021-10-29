@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1567087481043.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1559747987",
+    "id" : "CD64E13E",
+    "lastKnownWriteTime" : 1567082482,
+    "last_content_update" : 1567082482,
+    "path" : "E:/Advance Data Analytics/Assignment 1/Biol5700_Assignment 1/first_nb_diamonds.Rmd",
+    "project_path" : "first_nb_diamonds.Rmd",
+    "properties" : {
+        "chunk_output_type" : "inline"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

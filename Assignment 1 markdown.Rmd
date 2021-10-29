@@ -1,0 +1,105 @@
+---
+title: "Assignment 1"
+author: "Molly Richard"
+date: "29-Aug-2019"
+output:
+  html_document:
+    df_print: paged
+  fig_caption: yes
+  html_notebook: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(knitr)
+library(leaflet)
+
+```
+
+
+```{r SMR graph}
+ggplot(SMR, aes(x= Mass , y= Average_MR , shape=Sex, lty = Sex))+
+  geom_point(aes(size = 2))+
+  geom_smooth(method=(lm), se= FALSE)+
+  xlab("Body Mass (g)") + ylab("Oxygen Consumption (mL O2 hour-1)")+
+  theme_bw(base_size = 10)+
+  theme(legend.position = "none")
+```
+<span> **Graph 1.** Shows the relationship between mass and standard metabolic rate in male and female cottonmouths, <em>Agkistrodon piscivorus</em>.</span>
+
+
+
+```{r Energic costs of shedding}
+ 
+ggplot(SMR, aes(x= Mass , y= Average_MR, shape=Shedding, lty = Shedding))+
+  geom_point(aes(size = 2))+
+  geom_smooth(method=(lm), se = FALSE)+
+  xlab("Body Mass (g)") + ylab("Oxygen Consumption (mL O2 hour-1)")+
+  theme_bw(base_size = 10)+
+  theme(legend.position = "none")
+```
+<span> **Graph 2.** Depicts that energetic costs of shedding in individual cottonmouths. </span>
+
+<span> An ancova was used to determine there is no significant difference between shedding and non-shedding individual's metabolic rate when accounting for mass. (p=0.142, r<sup>2</sup>=0.6757, F-stat = 27.04, df=2,23) </span>
+```{r Analysis}
+Shed_SMR <- lm(Average_MR ~ Mass + Shedding, data = SMR)
+Shed_anova <- anova(Shed_SMR)
+summary(Shed_SMR)
+```
+ 
+
+```{r Base time and temp relationship}
+ggplot(SMR, aes(x= Basetime , y= BaseTemp))+
+  geom_point(aes(size = 2))+
+  geom_smooth(method=(lm), se= FALSE)+
+  xlab("Base Time (minutes)") + ylab("Base Temperature (C)")+
+  theme_bw(base_size = 10)+
+  theme(legend.position = "none")
+```
+<span> **Graph 3** shows the Base Time which is the time to draw a blood sample after capture, and the associated temperature at the time collection. </span>  
+
+The statistical summary below shows that there is no significant relationship between the time to blood after capture and the cloacal temperature at the time of blood aquisition. 
+```{r Statistical analysis for Blood time and temp}
+blood <- lm(BaseTemp ~ Basetime, data = SMR)
+blood_anova <- anova(blood)
+summary(blood)
+```
+
+
+<span> The summary below gives a snap shot of the first 15 rows of data used in the graphs depicted. </span>
+
+```{r Table 1}
+
+kable(SMR[1:15, ], format = "pandoc", caption = '<strong>Table 1.</strong>  A knitr table depicting the first 15 rows of data found in the SMR dataset.')
+```      
+
+###Summary table of statistics 
+<span> Table 2 and 3 depicts summary data of the average metabolic rates and average blood draw time of all cottonmouths, and the standard deviations between individuals and between times </span>
+```{r Table 2}
+SMRsummary <- summarise(group_by(SMR),
+                      n=n(), 
+                      mean=mean(Average_MR), 
+                      sd=sd(Mass))
+kable(SMRsummary, format = "pandoc", caption = '<strong>Table 2.</strong>  A summary table displaying the number of snakes captured, the average metabolic rate, and standard deviation of mass.') 
+```
+
+```{r Table 3}
+SMRsummary <- summarise(group_by(SMR),
+                      n=n(), 
+                      mean=mean(Basetime), 
+                      sd=sd(Basetime))
+kable(SMRsummary, format = "pandoc", caption = '<strong>Table 3.</strong>  Depicts the average time to draw blood and the standard deviation between draw times.') 
+```
+ 
+
+### Map of Capture Locations
+<span> This interactive map shows the capture location of the `r nrow(SMR)` snakes captured in 2019. </span>
+
+```{r Map of study area}
+leaflet(data=SMR) %>%
+    addTiles() %>%
+      addMarkers(data = SMR, lat = ~Latitude, lng = ~Longitude)
+```

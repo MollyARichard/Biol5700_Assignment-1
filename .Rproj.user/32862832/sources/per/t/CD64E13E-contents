@@ -1,0 +1,85 @@
+---
+title: "My First Sweet R Notebook"
+author: "C.M. Gienger"
+date: "19-July-2043"
+output:
+  html_notebook: default
+  pdf_document: default
+  fig_caption: yes
+---
+
+```{r setup, include=FALSE}
+#Its common to have a setup area to help keep track of required packages and formatting options
+library(tidyverse) #importing, tidying, plotting data
+library(knitr) #making tables
+library(leaflet)
+#knitr::opts_chunk$set(fig.width = 5, fig.asp = 1/3) #force figures to be a certain size and aspect ratio
+#opts_chunk$set(echo=FALSE)   #can force hide all code in the output; disables 'code folding'
+```
+
+This is an example of an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. This allows you to have a linear workflow, which will help you collaborate with others more efficiently. The basics of R Markdown can be found [here](https://r4ds.had.co.nz/r-markdown.html). 
+
+<span style="color:blue">First, lets make a simple graph using some base R code.</span>
+```{r Cars Graph}
+graph1 <- lm(dist ~ speed, data = cars)
+plot(dist ~ speed, data = cars)
+abline(graph1)
+
+```
+
+<span style="color:blue">Next, we can fit a linear model.</span>
+```{r Cars Linear Model}
+model1 <- lm(dist ~ speed, data = cars)
+anova(model1)
+```
+
+<span style="color:blue">Lets remake the graph from the diamonds example, using ggplot2 code.</span>
+
+```{r Diamond Graph, echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(diamonds, aes(carat, price)) +
+  geom_hex()
+
+ggsave("diamonds_md.pdf") #stores .pdf in root level project folder
+ggsave("outputs/diamonds_md.pdf") #ggplot stores it in outputs folder we created previously
+```
+*Inline code to use in displaying results.*
+
+We have data about `r nrow(diamonds)` diamonds. The average price is `r mean(diamonds$price)` dollars. Diamonds range from `r min(diamonds$price)` to `r max(diamonds$price)` dollars.
+
+<span style="color:blue">Lets make a table that displays some of the raw diamond data.</span>
+
+```{r Diamond Table}
+#https://rmarkdown.rstudio.com/lesson-7.html
+kable(diamonds[1:20, ], format = "pandoc", caption = 'Table 1. A knitr kable displaying the first 20 diamonds in the data set.')
+
+```
+
+<span style="color:blue">Lets make a table that summarizes the diamond data.</span>
+
+```{r Diamond Price Summary}
+summary1 <- summarise(group_by(diamonds, cut),
+          n=n(), 
+          mean=mean(price), 
+          sd=sd(price))
+kable(summary1, format = "pandoc", caption = 'Table 2. A summary kable displaying number, mean, and standard deviation for each of five cuts of diamond.')
+```
+
+<span style="color:blue">Lets insert a static image, like a picture or figure. Notice that this is inline code, not inside a code chunk.</span>
+<br />
+<br />
+
+![Figure 1. Geographic distribution of the Gila Monster (*Heloderma suspectum*)](images/gila_range_map.jpg)
+
+<span style="color:blue">Lets make a simple map for our report.</span>
+```{r Map}
+leaflet() %>%
+  setView(-87.354841, 36.534942, zoom = 16) %>% #lat-long of the place of interest
+  addTiles() %>%
+  addMarkers(-87.354841, 36.534942, popup = "APSU")
+```
+
+<span style="color:blue">Lets embed something totally ridiculous, but cool...</span>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8RXYN0DnYeU" frameborder="0" allowfullscreen></iframe>
+
+

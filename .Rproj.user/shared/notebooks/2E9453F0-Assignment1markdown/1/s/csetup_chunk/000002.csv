@@ -1,0 +1,36 @@
+"0","library(dplyr)"
+"2","
+Attaching package: ‘dplyr’
+
+"
+"2","The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+"
+"0","library(ggplot2)"
+"0","library(readr)"
+"0","library(knitr)"
+"2","package ‘knitr’ was built under R version 3.5.3"
+"0","library(leaflet)"
+"2","package ‘leaflet’ was built under R version 3.5.3"
+"0","SMR <- read_csv(""Master_Database_SMR only .csv"")"
+"2","Parsed with column specification:
+cols(
+  `Date Captured` = col_character(),
+  `Pit tag` = col_character(),
+  Mass = col_double(),
+  Sex = col_character(),
+  Shedding = col_character(),
+  Average_MR = col_double(),
+  Latitude = col_double(),
+  Longitude = col_double(),
+  Basetime = col_double(),
+  BaseTemp = col_double()
+)
+"

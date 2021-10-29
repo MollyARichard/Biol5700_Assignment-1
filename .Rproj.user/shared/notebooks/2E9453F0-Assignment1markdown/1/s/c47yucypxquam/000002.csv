@@ -1,0 +1,1 @@
+"0","kable(SMR[1:15, ], format = ""pandoc"", caption = '<strong>Table 1.</strong>  A knitr table depicting the first 15 rows of data found in the SMR dataset.')"

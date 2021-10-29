@@ -1,0 +1,77 @@
+---
+title: "Assignment 1"
+author: "Molly Richard"
+date: "29-Aug-2019"
+output:
+  html_notebook: default
+  pdf_document: default
+  fig_caption: yes
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(knitr)
+library(leaflet)
+
+```
+#Graph males and females w/ shedding individuals
+
+<span>Graph showing the relationship between mass and standard metabolic rate in male and female cottonmouths.</span>
+
+```{r SMR graph}
+ggplot(SMR, aes(x= Mass , y= Average_MR , shape=Sex, lty = Sex))+
+  geom_point(aes(size = 15))+
+  geom_smooth(method=(lm), se= FALSE)+
+  xlab("Body Mass (g)") + ylab("Oxygen Consumption (mL O2 hour-1)")+
+  theme_bw(base_size = 25)+
+  theme(legend.position = "none")
+```
+
+#Graph of shedding and non-shedding individuals
+
+<span> This graph depicts that energetic costs of shedding in individual cottonmouths. <span>
+
+```{r Energic costs of shedding}
+ 
+ggplot(SMR, aes(x= Mass , y= Average_MR, shape=Shedding, lty = Shedding))+
+  geom_point(aes(size = 15))+
+  geom_smooth(method=(lm), se = FALSE)+
+  xlab("Body Mass (g)") + ylab("Oxygen Consumption (mL O2 hour-1)")+
+  theme_bw(base_size = 25)+
+  theme(legend.position = "none")
+```
+
+##
+```{r Analysis}
+Shed_SMR <- lm(Average_MR ~ Mass + Shedding, data = SMR)
+Shed_anova <- anova(Shed_SMR)
+summary(Shed_SMR)
+```
+
+## Table showing data 
+```{r Table 1}
+
+kable(SMR[1:15, ], format = "pandoc", 
+      caption = 'Table 1. A knitr table depicting the first 15 rows of data found in the SMR dataset')
+```
+
+######
+```{r Table 2}
+SMRsummary <- summarise(group_by(SMR),
+                      n=n(), 
+                      mean=mean(Average_MR), 
+                      sd=sd(Mass))
+kable(SMRsummary, format = "pandoc", 
+      caption = 'Table 2. A summary table displaying the number of snakes captured, 
+      the average metabolic rate, and standard deviation of mass.')
+```
+###
+
+```{r Map of study area}
+leaflet(data=SMR) %>%
+    addTiles() %>%
+      addMarkers(data = SMR, lat = ~Latitude, lng = ~Longitude)
+```
+

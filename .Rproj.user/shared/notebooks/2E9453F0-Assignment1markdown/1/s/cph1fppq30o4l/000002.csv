@@ -1,0 +1,6 @@
+"0","ggplot(SMR, aes(x= Basetime , y= BaseTemp))+"
+"0","  geom_point(aes(size = 2))+"
+"0","  geom_smooth(method=(lm), se= FALSE)+"
+"0","  xlab(""Base Time (minutes)"") + ylab(""Base Temperature (C)"")+"
+"0","  theme_bw(base_size = 10)+"
+"0","  theme(legend.position = ""none"")"

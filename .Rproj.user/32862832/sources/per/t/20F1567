@@ -1,0 +1,27 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1567087217035.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1034769928",
+    "id" : "20F1567",
+    "lastKnownWriteTime" : 1567086326,
+    "last_content_update" : 1567087554159,
+    "path" : "E:/Advance Data Analytics/Assignment 1/Biol5700_Assignment 1/Assignment 1 markdown.Rmd",
+    "project_path" : "Assignment 1 markdown.Rmd",
+    "properties" : {
+        "chunk_output_type" : "inline",
+        "cursorPosition" : "20,117",
+        "last_setup_crc32" : "DF6C5A25901d8f0a",
+        "scrollLine" : "4"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
